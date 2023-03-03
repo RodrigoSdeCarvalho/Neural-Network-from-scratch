@@ -36,7 +36,7 @@ class NeuralNetwork:
             weight_error, bias_error = self.backward_propagation(layers_outputs, activated_layers_outputs, X, Y_enc)
             self.update_parameters(weight_error, bias_error, learning_rate)
 
-            print("Iteration: ", epoch)
+            print("Epoch: ", epoch)
             predictions = self.get_predictions(activated_layers_outputs[-1])
             print(self.get_accuracy(predictions, Y))
 
