@@ -66,7 +66,7 @@ class NeuralNetwork:
 
         for i in range(len(self.__layers) - 1, -1, -1):
             if i == 0:
-                dZ = self.__layers[i+1].W.T.dot(output_layer_errors[-len(self.__layers) + 1]) * self.__layers[i].activatate_derivative(layers_outputs[i])
+                dZ = self.__layers[i+1].W.T.dot(output_layer_errors[len(self.__layers) - i - 2]) * self.__layers[i].activatate_derivative(layers_outputs[i])
                 dW = (1 / m) * dZ.dot(X.T)
                 db = (1 / m) * np.sum(dZ)
             elif i == len(self.__layers) - 1:
@@ -74,7 +74,7 @@ class NeuralNetwork:
                 dW = (1 / m) * dZ.dot(activated_layers_outputs[i-1].T)
                 db = (1 / m) * np.sum(dZ)
             else:
-                dZ = self.__layers[i+1].W.T.dot(output_layer_errors[-len(self.__layers) + 1]) * self.__layers[i].activatate_derivative(layers_outputs[i])
+                dZ = self.__layers[i+1].W.T.dot(output_layer_errors[len(self.__layers) - i - 2]) * self.__layers[i].activatate_derivative(layers_outputs[i])
                 dW = (1 / m) * dZ.dot(activated_layers_outputs[i-1].T)
                 db = (1 / m) * np.sum(dZ)
 
