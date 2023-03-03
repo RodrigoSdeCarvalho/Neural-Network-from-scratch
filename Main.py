@@ -9,7 +9,7 @@ import os
 
 def main() -> None:
     train_data, num_of_images = Data.Preprocessor.load_train_data()
-    X_train, Y_train, X_dev, Y_dev = Data.Preprocessor.preprocess_train_data(train_data)
+    X_train, Y_train, X_test, Y_test = Data.Preprocessor.preprocess_train_data(train_data)
 
     if not exists(os.path.join(Data.Preprocessor.SRC_PATH, "ANN", "model", "network.sav")):
         neural_network = NeuralNetwork(num_of_images)
@@ -22,12 +22,12 @@ def main() -> None:
     else:
         neural_network = NeuralNetwork.load_model()
 
-    predictions = neural_network.predict(X=X_dev)
-    print("Accuracy:", neural_network.get_accuracy(predictions, Y_dev))
+    predictions = neural_network.predict(X=X_test)
+    print("Accuracy:", neural_network.get_accuracy(predictions, Y_test))
 
     for i in range(10):
-        index = random.randint(0, len(X_dev))
-        neural_network.test_prediction(index, X=X_dev, Y=Y_dev)
+        index = random.randint(0, len(X_test))
+        neural_network.test_prediction(index, X=X_test, Y=Y_test)
 
 
 if __name__ == "__main__":
